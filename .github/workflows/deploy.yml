@@ -73,7 +73,7 @@ jobs:
       - name: Install Quartz plugins
         if: steps.quartz-deps-cache.outputs.cache-hit != 'true'
         working-directory: quartz-engine
-        run: npx quartz plugin install
+        run: npx quartz plugin install --from-config
 
       - name: Build site
         working-directory: quartz-engine
