@@ -13,6 +13,8 @@ permissions:
 concurrency:
   group: pages
   cancel-in-progress: false
+  env:
+  THEME_NAME: cupertino
 
 jobs:
   build:
@@ -74,6 +76,9 @@ jobs:
         if: steps.quartz-deps-cache.outputs.cache-hit != 'true'
         working-directory: quartz-engine
         run: npx quartz plugin install --from-config
+
+      - name: Fetch Quartz Theme
+        run: curl -s -S https://raw.githubusercontent.com/saberzero1/quartz-themes/master/action.sh | bash -s -- $THEME_NAME
 
       - name: Build site
         working-directory: quartz-engine
